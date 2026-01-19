@@ -166,7 +166,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: space-between;
-            padding: 8px 6px;
+            padding: 4px;
             font-weight: bold;
             box-shadow: 
                 0 3px 6px rgba(0, 0, 0, 0.3),
@@ -187,42 +187,102 @@
             pointer-events: none;
         }
 
-        .card-value {
-            font-size: 20px;
-            line-height: 1;
-            font-weight: 900;
-            font-family: 'Arial Black', Arial, Helvetica, sans-serif;
-            text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+        /* Corner index container */
+        .card-corner {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            line-height: 0.85;
+            gap: 1px;
         }
 
-        /* Position card value at top left corner */
-        .card-value-top {
+        .card-corner-top {
             align-self: flex-start;
+            margin-left: 3px;
+            margin-top: 2px;
         }
 
-        /* Position card value at bottom right corner, rotated 180deg for traditional playing card style */
-        .card-value-bottom {
+        .card-corner-bottom {
             align-self: flex-end;
+            margin-right: 3px;
+            margin-bottom: 2px;
             transform: rotate(180deg);
         }
 
-        .card-suit {
-            font-size: 40px;
+        .card-rank {
+            font-size: 14px;
+            font-weight: 900;
+            font-family: 'Arial Black', Arial, Helvetica, sans-serif;
             line-height: 1;
-            filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.15));
         }
 
-        .card.hearts .card-value,
-        .card.hearts .card-suit,
-        .card.diamonds .card-value,
-        .card.diamonds .card-suit {
+        .card-corner-suit {
+            font-size: 12px;
+            line-height: 1;
+        }
+
+        /* Central suit pattern */
+        .card-center {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            width: 100%;
+        }
+
+        .card-suit-pattern {
+            display: grid;
+            gap: 4px;
+            align-items: center;
+            justify-items: center;
+        }
+
+        .suit-symbol {
+            font-size: 18px;
+            line-height: 1;
+            filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.1));
+        }
+
+        /* Grid layouts for different card ranks */
+        .pattern-1 { grid-template: 1fr / 1fr; }
+        .pattern-2 { grid-template: 1fr 1fr / 1fr; }
+        .pattern-3 { grid-template: 1fr 1fr 1fr / 1fr; }
+        .pattern-4 { grid-template: 1fr 1fr / 1fr 1fr; }
+        .pattern-5 { grid-template: 1fr 1fr 1fr / 1fr 1fr; }
+        .pattern-6 { grid-template: 1fr 1fr 1fr / 1fr 1fr; }
+        .pattern-7 { grid-template: 1fr 1fr 1fr 1fr / 1fr 1fr; }
+        .pattern-8 { grid-template: 1fr 1fr 1fr 1fr / 1fr 1fr; }
+        .pattern-9 { grid-template: 1fr 1fr 1fr 1fr / 1fr 1fr 1fr; }
+        .pattern-10 { grid-template: 1fr 1fr 1fr 1fr / 1fr 1fr 1fr; }
+        
+        /* Face card styling */
+        .face-card-letter {
+            font-size: 36px;
+            font-weight: 900;
+            font-family: 'Arial Black', Arial, Helvetica, sans-serif;
+            line-height: 1;
+        }
+
+        .card.hearts .card-rank,
+        .card.hearts .card-corner-suit,
+        .card.hearts .suit-symbol,
+        .card.hearts .face-card-letter,
+        .card.diamonds .card-rank,
+        .card.diamonds .card-corner-suit,
+        .card.diamonds .suit-symbol,
+        .card.diamonds .face-card-letter {
             color: #e2001a;
         }
 
-        .card.clubs .card-value,
-        .card.clubs .card-suit,
-        .card.spades .card-value,
-        .card.spades .card-suit {
+        .card.clubs .card-rank,
+        .card.clubs .card-corner-suit,
+        .card.clubs .suit-symbol,
+        .card.clubs .face-card-letter,
+        .card.spades .card-rank,
+        .card.spades .card-corner-suit,
+        .card.spades .suit-symbol,
+        .card.spades .face-card-letter {
             color: #000000;
         }
 
@@ -528,25 +588,88 @@
             if (isHuman) {
                 // Random card for human player (face-up)
                 const randomSuitIndex = Math.floor(Math.random() * suits.length);
-                const randomValue = values[Math.floor(Math.random() * values.length)];
+                const randomValueIndex = Math.floor(Math.random() * values.length);
+                const randomValue = values[randomValueIndex];
+                const suitSymbol = suits[randomSuitIndex];
                 
                 card.classList.add('face-up', suitNames[randomSuitIndex]);
                 
-                const topValue = document.createElement('div');
-                topValue.className = 'card-value card-value-top';
-                topValue.textContent = randomValue;
+                // Top-left corner index
+                const topCorner = document.createElement('div');
+                topCorner.className = 'card-corner card-corner-top';
                 
-                const suitDiv = document.createElement('div');
-                suitDiv.className = 'card-suit';
-                suitDiv.textContent = suits[randomSuitIndex];
+                const topRank = document.createElement('div');
+                topRank.className = 'card-rank';
+                topRank.textContent = randomValue;
                 
-                const bottomValue = document.createElement('div');
-                bottomValue.className = 'card-value card-value-bottom';
-                bottomValue.textContent = randomValue;
+                const topSuit = document.createElement('div');
+                topSuit.className = 'card-corner-suit';
+                topSuit.textContent = suitSymbol;
                 
-                card.appendChild(topValue);
-                card.appendChild(suitDiv);
-                card.appendChild(bottomValue);
+                topCorner.appendChild(topRank);
+                topCorner.appendChild(topSuit);
+                
+                // Central suit pattern
+                const center = document.createElement('div');
+                center.className = 'card-center';
+                
+                const pattern = document.createElement('div');
+                pattern.className = 'card-suit-pattern';
+                
+                // Generate suit pattern based on rank
+                if (randomValue === 'A') {
+                    // Ace: single large symbol
+                    pattern.className += ' pattern-1';
+                    const symbol = document.createElement('div');
+                    symbol.className = 'suit-symbol';
+                    symbol.style.fontSize = '32px';
+                    symbol.textContent = suitSymbol;
+                    pattern.appendChild(symbol);
+                } else if (randomValue === 'J' || randomValue === 'Q' || randomValue === 'K') {
+                    // Face cards: show the letter
+                    const letter = document.createElement('div');
+                    letter.className = 'face-card-letter';
+                    letter.textContent = randomValue;
+                    pattern.appendChild(letter);
+                } else {
+                    // Number cards: create appropriate pattern
+                    const numValue = parseInt(randomValue);
+                    pattern.className += ` pattern-${numValue}`;
+                    
+                    for (let i = 0; i < numValue; i++) {
+                        const symbol = document.createElement('div');
+                        symbol.className = 'suit-symbol';
+                        symbol.textContent = suitSymbol;
+                        
+                        // For cards 7 and 8, add middle card positioning
+                        if ((numValue === 7 || numValue === 8) && i === 3) {
+                            symbol.style.gridColumn = '1 / -1';
+                        }
+                        
+                        pattern.appendChild(symbol);
+                    }
+                }
+                
+                center.appendChild(pattern);
+                
+                // Bottom-right corner index (rotated)
+                const bottomCorner = document.createElement('div');
+                bottomCorner.className = 'card-corner card-corner-bottom';
+                
+                const bottomRank = document.createElement('div');
+                bottomRank.className = 'card-rank';
+                bottomRank.textContent = randomValue;
+                
+                const bottomSuit = document.createElement('div');
+                bottomSuit.className = 'card-corner-suit';
+                bottomSuit.textContent = suitSymbol;
+                
+                bottomCorner.appendChild(bottomRank);
+                bottomCorner.appendChild(bottomSuit);
+                
+                card.appendChild(topCorner);
+                card.appendChild(center);
+                card.appendChild(bottomCorner);
             } else {
                 // Face-down card for other players
                 card.classList.add('face-down');
