@@ -662,13 +662,13 @@
                             pattern.appendChild(symbol);
                         }
                     } else if (numValue === 5) {
-                        // 2x2 grid plus center
+                        // 2x2 grid plus center (index 2 spans both columns for center position)
                         for (let i = 0; i < 5; i++) {
                             const symbol = document.createElement('div');
                             symbol.className = 'suit-symbol';
                             symbol.textContent = suitSymbol;
                             if (i === 2) {
-                                // Center symbol spans both columns
+                                // Center symbol (3rd position) spans both columns
                                 symbol.style.gridColumn = '1 / -1';
                             }
                             pattern.appendChild(symbol);
@@ -682,25 +682,25 @@
                             pattern.appendChild(symbol);
                         }
                     } else if (numValue === 7) {
-                        // 3x2 grid plus one in top-middle
+                        // 3x2 grid plus one in top-middle (index 2 is top-middle position)
                         for (let i = 0; i < 7; i++) {
                             const symbol = document.createElement('div');
                             symbol.className = 'suit-symbol';
                             symbol.textContent = suitSymbol;
                             if (i === 2) {
-                                // Top-middle symbol spans both columns
+                                // Top-middle symbol (3rd position) spans both columns
                                 symbol.style.gridColumn = '1 / -1';
                             }
                             pattern.appendChild(symbol);
                         }
                     } else if (numValue === 8) {
-                        // 4x2 grid with middle symbols
+                        // 4x2 grid with middle symbols (indices 2 and 5 are top-middle and bottom-middle)
                         for (let i = 0; i < 8; i++) {
                             const symbol = document.createElement('div');
                             symbol.className = 'suit-symbol';
                             symbol.textContent = suitSymbol;
                             if (i === 2 || i === 5) {
-                                // Top-middle and bottom-middle symbols span both columns
+                                // Top-middle (3rd position) and bottom-middle (6th position) span both columns
                                 symbol.style.gridColumn = '1 / -1';
                             }
                             pattern.appendChild(symbol);
@@ -714,13 +714,13 @@
                             pattern.appendChild(symbol);
                         }
                     } else if (numValue === 10) {
-                        // 3x3 grid plus two in middle
+                        // 3x3 grid plus two in middle (indices 3 and 7 are top-middle and bottom-middle)
                         for (let i = 0; i < 10; i++) {
                             const symbol = document.createElement('div');
                             symbol.className = 'suit-symbol';
                             symbol.textContent = suitSymbol;
                             if (i === 3 || i === 7) {
-                                // Top-middle and bottom-middle symbols span all columns
+                                // Top-middle (4th position) and bottom-middle (8th position) span all columns
                                 symbol.style.gridColumn = '1 / -1';
                             }
                             pattern.appendChild(symbol);
