@@ -168,10 +168,12 @@
             font-weight: 900;
         }
 
+        /* Position card value at top left corner */
         .card-value-top {
             align-self: flex-start;
         }
 
+        /* Position card value at bottom right corner, rotated 180deg for traditional playing card style */
         .card-value-bottom {
             align-self: flex-end;
             transform: rotate(180deg);
@@ -239,6 +241,7 @@
         }
 
         .deck-card::before {
+            /* Inner border effect for enhanced visual depth on deck cards */
             content: '';
             position: absolute;
             width: 85%;
