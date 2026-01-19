@@ -41,11 +41,14 @@
                     rgba(0, 0, 0, 0.05) 3px
                 ),
                 radial-gradient(ellipse at center, #0d7d3f 0%, #0a6633 50%, #085528 100%);
-            border-radius: 50%;
+            border-radius: 20px;
+            border: 8px solid;
+            border-image: linear-gradient(135deg, #00ff00 0%, #00cc00 25%, #009900 50%, #00cc00 75%, #00ff00 100%) 1;
             box-shadow: 
                 0 0 50px rgba(0, 0, 0, 0.8), 
                 inset 0 0 150px rgba(0, 0, 0, 0.3),
-                inset 0 0 50px rgba(0, 80, 40, 0.3);
+                inset 0 0 50px rgba(0, 80, 40, 0.3),
+                0 0 30px rgba(0, 255, 0, 0.3);
         }
 
         .player-seat {
@@ -111,45 +114,54 @@
 
         .card.face-down {
             background: 
-                repeating-linear-gradient(
-                    45deg,
-                    #b22222 0px,
-                    #b22222 10px,
-                    #8b0000 10px,
-                    #8b0000 20px
-                ),
-                linear-gradient(135deg, #8b0000 0%, #b22222 50%, #8b0000 100%);
-            border: 3px solid #000;
+                linear-gradient(135deg, #c41e3a 0%, #8b1a2e 50%, #c41e3a 100%);
+            border: 3px solid #1a1a1a;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
+            position: relative;
         }
 
         .card.face-down::before {
             content: '';
-            width: 85%;
-            height: 85%;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            border-radius: 5px;
+            width: 90%;
+            height: 92%;
+            border: 3px solid #d4af37;
+            border-radius: 6px;
             position: absolute;
-            background: 
-                radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 70% 70%, rgba(0, 0, 0, 0.2) 0%, transparent 50%);
+            box-shadow: 
+                inset 0 0 10px rgba(0, 0, 0, 0.3),
+                0 0 5px rgba(212, 175, 55, 0.5);
         }
 
         .card.face-down::after {
-            content: '♠♥♦♣';
-            font-size: 16px;
-            color: rgba(255, 215, 0, 0.6);
-            font-weight: bold;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-            letter-spacing: 2px;
+            content: '';
+            position: absolute;
+            width: 75%;
+            height: 80%;
+            background: 
+                repeating-linear-gradient(
+                    45deg,
+                    transparent,
+                    transparent 8px,
+                    rgba(212, 175, 55, 0.15) 8px,
+                    rgba(212, 175, 55, 0.15) 16px
+                ),
+                repeating-linear-gradient(
+                    -45deg,
+                    transparent,
+                    transparent 8px,
+                    rgba(212, 175, 55, 0.15) 8px,
+                    rgba(212, 175, 55, 0.15) 16px
+                );
+            border-radius: 4px;
         }
 
         .card.face-up {
-            background: #fff;
-            border: 2px solid #000;
+            background: 
+                linear-gradient(to bottom, #ffffff 0%, #f8f8f8 100%);
+            border: 2px solid #333;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -157,14 +169,30 @@
             padding: 8px 6px;
             font-weight: bold;
             box-shadow: 
-                0 2px 4px rgba(0, 0, 0, 0.2),
-                inset 0 0 0 1px rgba(255, 255, 255, 0.8);
+                0 3px 6px rgba(0, 0, 0, 0.3),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.9),
+                inset 0 1px 2px rgba(255, 255, 255, 0.5);
+            position: relative;
+        }
+
+        .card.face-up::before {
+            content: '';
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            right: 4px;
+            bottom: 4px;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            border-radius: 4px;
+            pointer-events: none;
         }
 
         .card-value {
-            font-size: 22px;
+            font-size: 20px;
             line-height: 1;
             font-weight: 900;
+            font-family: 'Arial Black', Arial, Helvetica, sans-serif;
+            text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
         }
 
         /* Position card value at top left corner */
@@ -179,22 +207,23 @@
         }
 
         .card-suit {
-            font-size: 36px;
+            font-size: 40px;
             line-height: 1;
+            filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.15));
         }
 
         .card.hearts .card-value,
         .card.hearts .card-suit,
         .card.diamonds .card-value,
         .card.diamonds .card-suit {
-            color: #dc143c;
+            color: #e2001a;
         }
 
         .card.clubs .card-value,
         .card.clubs .card-suit,
         .card.spades .card-value,
         .card.spades .card-suit {
-            color: #000;
+            color: #000000;
         }
 
         /* Center deck area */
@@ -225,15 +254,8 @@
             width: 80px;
             height: 115px;
             background: 
-                repeating-linear-gradient(
-                    45deg,
-                    #b22222 0px,
-                    #b22222 10px,
-                    #8b0000 10px,
-                    #8b0000 20px
-                ),
-                linear-gradient(135deg, #8b0000 0%, #b22222 50%, #8b0000 100%);
-            border: 3px solid #000;
+                linear-gradient(135deg, #c41e3a 0%, #8b1a2e 50%, #c41e3a 100%);
+            border: 3px solid #1a1a1a;
             border-radius: 10px;
             position: absolute;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
@@ -244,12 +266,15 @@
             content: '';
             position: absolute;
             width: 85%;
-            height: 85%;
-            border: 2px solid rgba(255, 255, 255, 0.2);
+            height: 88%;
+            border: 3px solid #d4af37;
             border-radius: 6px;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
+            box-shadow: 
+                inset 0 0 10px rgba(0, 0, 0, 0.3),
+                0 0 5px rgba(212, 175, 55, 0.5);
         }
 
         .deck-card:nth-child(1) { top: 0; left: 0; }
