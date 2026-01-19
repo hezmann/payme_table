@@ -159,69 +159,92 @@
         }
 
         .card.face-up {
-            background: 
-                linear-gradient(to bottom, #ffffff 0%, #f8f8f8 100%);
-            border: 2px solid #333;
+            background: white;
+            border: 3px solid #000;
+            border-radius: 8px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: space-between;
-            padding: 8px 6px;
+            padding: 5px;
             font-weight: bold;
             box-shadow: 
-                0 3px 6px rgba(0, 0, 0, 0.3),
-                inset 0 0 0 1px rgba(255, 255, 255, 0.9),
-                inset 0 1px 2px rgba(255, 255, 255, 0.5);
+                0 4px 8px rgba(0, 0, 0, 0.4),
+                inset 0 0 0 2px rgba(255, 255, 255, 0.95);
             position: relative;
+            overflow: visible;
         }
 
         .card.face-up::before {
             content: '';
             position: absolute;
-            top: 4px;
-            left: 4px;
-            right: 4px;
-            bottom: 4px;
-            border: 1px solid rgba(0, 0, 0, 0.05);
-            border-radius: 4px;
+            top: 5px;
+            left: 5px;
+            right: 5px;
+            bottom: 5px;
+            border: 1.5px solid rgba(0, 0, 0, 0.08);
+            border-radius: 3px;
             pointer-events: none;
         }
 
         .card-value {
-            font-size: 20px;
+            font-size: 16px;
             line-height: 1;
             font-weight: 900;
-            font-family: 'Arial Black', Arial, Helvetica, sans-serif;
-            text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+            font-family: 'Georgia', 'Times New Roman', serif;
+            text-shadow: none;
         }
 
         /* Position card value at top left corner */
         .card-value-top {
             align-self: flex-start;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1px;
         }
 
         /* Position card value at bottom right corner, rotated 180deg for traditional playing card style */
         .card-value-bottom {
             align-self: flex-end;
             transform: rotate(180deg);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1px;
+        }
+
+        .card-value-text {
+            font-size: 16px;
+            line-height: 1;
+            font-weight: 900;
+        }
+
+        .card-value-suit {
+            font-size: 12px;
+            line-height: 1;
         }
 
         .card-suit {
-            font-size: 40px;
+            font-size: 36px;
             line-height: 1;
-            filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.15));
+            filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
         }
 
-        .card.hearts .card-value,
+        .card.hearts .card-value-text,
+        .card.hearts .card-value-suit,
         .card.hearts .card-suit,
-        .card.diamonds .card-value,
+        .card.diamonds .card-value-text,
+        .card.diamonds .card-value-suit,
         .card.diamonds .card-suit {
-            color: #e2001a;
+            color: #dc143c;
         }
 
-        .card.clubs .card-value,
+        .card.clubs .card-value-text,
+        .card.clubs .card-value-suit,
         .card.clubs .card-suit,
-        .card.spades .card-value,
+        .card.spades .card-value-text,
+        .card.spades .card-value-suit,
         .card.spades .card-suit {
             color: #000000;
         }
@@ -532,17 +555,40 @@
                 
                 card.classList.add('face-up', suitNames[randomSuitIndex]);
                 
+                // Top left corner index (value + small suit)
                 const topValue = document.createElement('div');
                 topValue.className = 'card-value card-value-top';
-                topValue.textContent = randomValue;
                 
+                const topValueText = document.createElement('div');
+                topValueText.className = 'card-value-text';
+                topValueText.textContent = randomValue;
+                
+                const topValueSuit = document.createElement('div');
+                topValueSuit.className = 'card-value-suit';
+                topValueSuit.textContent = suits[randomSuitIndex];
+                
+                topValue.appendChild(topValueText);
+                topValue.appendChild(topValueSuit);
+                
+                // Center suit symbol
                 const suitDiv = document.createElement('div');
                 suitDiv.className = 'card-suit';
                 suitDiv.textContent = suits[randomSuitIndex];
                 
+                // Bottom right corner index (value + small suit, rotated)
                 const bottomValue = document.createElement('div');
                 bottomValue.className = 'card-value card-value-bottom';
-                bottomValue.textContent = randomValue;
+                
+                const bottomValueText = document.createElement('div');
+                bottomValueText.className = 'card-value-text';
+                bottomValueText.textContent = randomValue;
+                
+                const bottomValueSuit = document.createElement('div');
+                bottomValueSuit.className = 'card-value-suit';
+                bottomValueSuit.textContent = suits[randomSuitIndex];
+                
+                bottomValue.appendChild(bottomValueText);
+                bottomValue.appendChild(bottomValueSuit);
                 
                 card.appendChild(topValue);
                 card.appendChild(suitDiv);
