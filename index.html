@@ -251,10 +251,10 @@
         .pattern-4 { grid-template: 1fr 1fr / 1fr 1fr; }
         .pattern-5 { grid-template: 1fr 1fr 1fr / 1fr 1fr; }
         .pattern-6 { grid-template: 1fr 1fr 1fr / 1fr 1fr; }
-        .pattern-7 { grid-template: 1fr 1fr 1fr 1fr / 1fr 1fr; }
-        .pattern-8 { grid-template: 1fr 1fr 1fr 1fr / 1fr 1fr; }
-        .pattern-9 { grid-template: 1fr 1fr 1fr 1fr / 1fr 1fr 1fr; }
-        .pattern-10 { grid-template: 1fr 1fr 1fr 1fr / 1fr 1fr 1fr; }
+        .pattern-7 { grid-template: 1fr auto 1fr 1fr / 1fr 1fr; }
+        .pattern-8 { grid-template: 1fr auto 1fr 1fr / 1fr 1fr; }
+        .pattern-9 { grid-template: 1fr 1fr 1fr / 1fr 1fr 1fr; }
+        .pattern-10 { grid-template: 1fr auto 1fr 1fr / 1fr 1fr 1fr; }
         
         /* Face card styling */
         .face-card-letter {
@@ -636,17 +636,95 @@
                     const numValue = parseInt(randomValue);
                     pattern.className += ` pattern-${numValue}`;
                     
-                    for (let i = 0; i < numValue; i++) {
-                        const symbol = document.createElement('div');
-                        symbol.className = 'suit-symbol';
-                        symbol.textContent = suitSymbol;
-                        
-                        // For cards 7 and 8, add middle card positioning
-                        if ((numValue === 7 || numValue === 8) && i === 3) {
-                            symbol.style.gridColumn = '1 / -1';
+                    // Define traditional card patterns
+                    if (numValue === 2) {
+                        // Top and bottom
+                        for (let i = 0; i < 2; i++) {
+                            const symbol = document.createElement('div');
+                            symbol.className = 'suit-symbol';
+                            symbol.textContent = suitSymbol;
+                            pattern.appendChild(symbol);
                         }
-                        
-                        pattern.appendChild(symbol);
+                    } else if (numValue === 3) {
+                        // Top, middle, bottom
+                        for (let i = 0; i < 3; i++) {
+                            const symbol = document.createElement('div');
+                            symbol.className = 'suit-symbol';
+                            symbol.textContent = suitSymbol;
+                            pattern.appendChild(symbol);
+                        }
+                    } else if (numValue === 4) {
+                        // 2x2 grid
+                        for (let i = 0; i < 4; i++) {
+                            const symbol = document.createElement('div');
+                            symbol.className = 'suit-symbol';
+                            symbol.textContent = suitSymbol;
+                            pattern.appendChild(symbol);
+                        }
+                    } else if (numValue === 5) {
+                        // 2x2 grid plus center
+                        for (let i = 0; i < 5; i++) {
+                            const symbol = document.createElement('div');
+                            symbol.className = 'suit-symbol';
+                            symbol.textContent = suitSymbol;
+                            if (i === 2) {
+                                // Center symbol spans both columns
+                                symbol.style.gridColumn = '1 / -1';
+                            }
+                            pattern.appendChild(symbol);
+                        }
+                    } else if (numValue === 6) {
+                        // 3x2 grid
+                        for (let i = 0; i < 6; i++) {
+                            const symbol = document.createElement('div');
+                            symbol.className = 'suit-symbol';
+                            symbol.textContent = suitSymbol;
+                            pattern.appendChild(symbol);
+                        }
+                    } else if (numValue === 7) {
+                        // 3x2 grid plus one in top-middle
+                        for (let i = 0; i < 7; i++) {
+                            const symbol = document.createElement('div');
+                            symbol.className = 'suit-symbol';
+                            symbol.textContent = suitSymbol;
+                            if (i === 2) {
+                                // Top-middle symbol spans both columns
+                                symbol.style.gridColumn = '1 / -1';
+                            }
+                            pattern.appendChild(symbol);
+                        }
+                    } else if (numValue === 8) {
+                        // 4x2 grid with middle symbols
+                        for (let i = 0; i < 8; i++) {
+                            const symbol = document.createElement('div');
+                            symbol.className = 'suit-symbol';
+                            symbol.textContent = suitSymbol;
+                            if (i === 2 || i === 5) {
+                                // Top-middle and bottom-middle symbols span both columns
+                                symbol.style.gridColumn = '1 / -1';
+                            }
+                            pattern.appendChild(symbol);
+                        }
+                    } else if (numValue === 9) {
+                        // 3x3 grid
+                        for (let i = 0; i < 9; i++) {
+                            const symbol = document.createElement('div');
+                            symbol.className = 'suit-symbol';
+                            symbol.textContent = suitSymbol;
+                            pattern.appendChild(symbol);
+                        }
+                    } else if (numValue === 10) {
+                        // 3x3 grid plus two in middle
+                        for (let i = 0; i < 10; i++) {
+                            const symbol = document.createElement('div');
+                            symbol.className = 'suit-symbol';
+                            symbol.textContent = suitSymbol;
+                            if (i === 3 || i === 7) {
+                                // Top-middle and bottom-middle symbols span all columns
+                                symbol.style.gridColumn = '1 / -1';
+                            }
+                            pattern.appendChild(symbol);
+                        }
                     }
                 }
                 
