@@ -168,6 +168,15 @@
             font-weight: 900;
         }
 
+        .card-value-top {
+            align-self: flex-start;
+        }
+
+        .card-value-bottom {
+            align-self: flex-end;
+            transform: rotate(180deg);
+        }
+
         .card-suit {
             font-size: 36px;
             line-height: 1;
@@ -497,19 +506,16 @@
                 card.classList.add('face-up', suitNames[randomSuitIndex]);
                 
                 const topValue = document.createElement('div');
-                topValue.className = 'card-value';
+                topValue.className = 'card-value card-value-top';
                 topValue.textContent = randomValue;
-                topValue.style.alignSelf = 'flex-start';
                 
                 const suitDiv = document.createElement('div');
                 suitDiv.className = 'card-suit';
                 suitDiv.textContent = suits[randomSuitIndex];
                 
                 const bottomValue = document.createElement('div');
-                bottomValue.className = 'card-value';
+                bottomValue.className = 'card-value card-value-bottom';
                 bottomValue.textContent = randomValue;
-                bottomValue.style.alignSelf = 'flex-end';
-                bottomValue.style.transform = 'rotate(180deg)';
                 
                 card.appendChild(topValue);
                 card.appendChild(suitDiv);
