@@ -13,7 +13,7 @@
 
         body {
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #7e22ce 100%);
+            background: #1a1a1a;
             height: 100vh;
             overflow: hidden;
             display: flex;
@@ -25,10 +25,28 @@
             width: 95vw;
             height: 95vh;
             position: relative;
-            background: radial-gradient(ellipse at center, #0f5132 0%, #0a3d26 50%, #052915 100%);
+            background: 
+                repeating-linear-gradient(
+                    0deg,
+                    rgba(0, 0, 0, 0.05) 0px,
+                    transparent 1px,
+                    transparent 2px,
+                    rgba(0, 0, 0, 0.05) 3px
+                ),
+                repeating-linear-gradient(
+                    90deg,
+                    rgba(0, 0, 0, 0.05) 0px,
+                    transparent 1px,
+                    transparent 2px,
+                    rgba(0, 0, 0, 0.05) 3px
+                ),
+                radial-gradient(ellipse at center, #1a5c3a 0%, #0f4228 50%, #0a3520 100%);
             border-radius: 50%;
             border: 15px solid #8b4513;
-            box-shadow: 0 0 50px rgba(0, 0, 0, 0.8), inset 0 0 100px rgba(0, 0, 0, 0.5);
+            box-shadow: 
+                0 0 50px rgba(0, 0, 0, 0.8), 
+                inset 0 0 150px rgba(0, 0, 0, 0.3),
+                inset 0 0 50px rgba(0, 80, 40, 0.3);
         }
 
         .player-seat {
@@ -93,47 +111,76 @@
         }
 
         .card.face-down {
-            background: linear-gradient(135deg, #8b0000 0%, #ff6347 50%, #8b0000 100%);
-            border: 2px solid #ffd700;
+            background: 
+                repeating-linear-gradient(
+                    45deg,
+                    #b22222 0px,
+                    #b22222 10px,
+                    #8b0000 10px,
+                    #8b0000 20px
+                ),
+                linear-gradient(135deg, #8b0000 0%, #b22222 50%, #8b0000 100%);
+            border: 3px solid #000;
             display: flex;
             align-items: center;
             justify-content: center;
+            overflow: hidden;
         }
 
         .card.face-down::before {
             content: '';
-            width: 90%;
-            height: 90%;
-            border: 3px solid rgba(255, 215, 0, 0.3);
+            width: 85%;
+            height: 85%;
+            border: 2px solid rgba(255, 255, 255, 0.3);
             border-radius: 5px;
             position: absolute;
+            background: 
+                radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 70% 70%, rgba(0, 0, 0, 0.2) 0%, transparent 50%);
         }
 
         .card.face-down::after {
             content: '♠♥♦♣';
-            font-size: 18px;
-            color: rgba(255, 215, 0, 0.5);
+            font-size: 16px;
+            color: rgba(255, 215, 0, 0.6);
             font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            letter-spacing: 2px;
         }
 
         .card.face-up {
-            background: white;
-            border: 2px solid #333;
+            background: #fff;
+            border: 2px solid #000;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: space-between;
-            padding: 8px;
+            padding: 8px 6px;
             font-weight: bold;
+            box-shadow: 
+                0 2px 4px rgba(0, 0, 0, 0.2),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.8);
         }
 
         .card-value {
-            font-size: 20px;
+            font-size: 22px;
             line-height: 1;
+            font-weight: 900;
+        }
+
+        /* Position card value at top left corner */
+        .card-value-top {
+            align-self: flex-start;
+        }
+
+        /* Position card value at bottom right corner, rotated 180deg for traditional playing card style */
+        .card-value-bottom {
+            align-self: flex-end;
+            transform: rotate(180deg);
         }
 
         .card-suit {
-            font-size: 32px;
+            font-size: 36px;
             line-height: 1;
         }
 
@@ -178,16 +225,39 @@
         .deck-card {
             width: 80px;
             height: 115px;
-            background: linear-gradient(135deg, #8b0000 0%, #ff6347 50%, #8b0000 100%);
-            border: 3px solid #ffd700;
+            background: 
+                repeating-linear-gradient(
+                    45deg,
+                    #b22222 0px,
+                    #b22222 10px,
+                    #8b0000 10px,
+                    #8b0000 20px
+                ),
+                linear-gradient(135deg, #8b0000 0%, #b22222 50%, #8b0000 100%);
+            border: 3px solid #000;
             border-radius: 10px;
             position: absolute;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+        }
+
+        .deck-card::before {
+            /* Inner border effect for enhanced visual depth on deck cards */
+            content: '';
+            position: absolute;
+            width: 85%;
+            height: 85%;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 6px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
         }
 
         .deck-card:nth-child(1) { top: 0; left: 0; }
-        .deck-card:nth-child(2) { top: -3px; left: 3px; }
-        .deck-card:nth-child(3) { top: -6px; left: 6px; }
+        .deck-card:nth-child(2) { top: -2px; left: 2px; }
+        .deck-card:nth-child(3) { top: -4px; left: 4px; }
+        .deck-card:nth-child(4) { top: -6px; left: 6px; }
+        .deck-card:nth-child(5) { top: -8px; left: 8px; }
 
         .game-title {
             color: #ffd700;
@@ -346,6 +416,8 @@
                 <div class="deck-card"></div>
                 <div class="deck-card"></div>
                 <div class="deck-card"></div>
+                <div class="deck-card"></div>
+                <div class="deck-card"></div>
             </div>
             <button class="deal-button" id="dealButton" onclick="dealCards()">Deal Cards</button>
         </div>
@@ -437,7 +509,7 @@
                 card.classList.add('face-up', suitNames[randomSuitIndex]);
                 
                 const topValue = document.createElement('div');
-                topValue.className = 'card-value';
+                topValue.className = 'card-value card-value-top';
                 topValue.textContent = randomValue;
                 
                 const suitDiv = document.createElement('div');
@@ -445,7 +517,7 @@
                 suitDiv.textContent = suits[randomSuitIndex];
                 
                 const bottomValue = document.createElement('div');
-                bottomValue.className = 'card-value';
+                bottomValue.className = 'card-value card-value-bottom';
                 bottomValue.textContent = randomValue;
                 
                 card.appendChild(topValue);
