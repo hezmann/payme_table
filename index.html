@@ -744,9 +744,10 @@
             padding: 15px;
             box-shadow: none;
             position: absolute;
-            top: 50%;
+            top: 20%;
             left: 50%;
             transform: translate(-50%, -50%);
+            z-index: 10;
         }
 
         .deck-pile, .discard-pile {
@@ -1213,6 +1214,8 @@
             flex-direction: column;
             overflow-y: auto;
             overflow-x: hidden;
+            padding-top: 180px;
+            justify-content: center;
         }
 
         .message-box {
@@ -1316,6 +1319,9 @@
             flex-direction: column;
             gap: 8px;
             z-index: 50;
+            position: relative;
+            margin-top: auto;
+            margin-bottom: 20px;
         }
 
         .meld-building-area .card {
@@ -1557,6 +1563,7 @@
                 flex-direction: row;
                 justify-content: center;
                 gap: 20px;
+                top: 15%;
             }
         }
 
@@ -1640,6 +1647,7 @@
 
             .deck-area {
                 gap: 15px;
+                top: 12%;
             }
 
             .pile-label {
